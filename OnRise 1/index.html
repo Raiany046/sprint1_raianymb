@@ -40,26 +40,25 @@
       <a href="noticia.html?id=1" class="card big-card fade-up" data-category="economia">
         <img src="imgs/economia.png" alt="foto da notícia" style="width:100%; border-radius:10px;">
         <div class="content">
-        <div imgs src="economia.png" alt="foto da notícia"></div>
           <div class="eyebrow">ECONOMIA</div>
           <h2>‘Legado das eleições 2026 será horrível, todos perderemos’, diz economista da ARX</h2>
           <p class="card-meta">Publicado em 14/10/2025 • HÁ 2 HORAS</p>
         </div>
       </a>
 
-      <!--/listadenotcia/-->
+      <!-- Lista de notícias fixas -->
       <div class="small-list">
         <a href="noticia.html?id=2" class="small-item fade-up" data-category="criptomoeda">
-<img src="imgs/cripto.png" alt="Imagem da notícia de cripto" class="thumb" style="width: 25%; height: 100px; border-radius: 10px; object-fit: cover;" />
+          <img src="imgs/cripto.png" alt="Imagem da notícia de cripto" class="thumb" style="width: 25%; height: 100px; border-radius: 10px; object-fit: cover;" />
           <div class="meta">
             <div class="kicker">CRIPTOMOEDA</div>
-            <h3> Ouro atinge novo recorde de US$ 4.200, enquanto bilhões em criptomoedas saem das corretoras</h3>
+            <h3>Ouro atinge novo recorde de US$ 4.200, enquanto bilhões em criptomoedas saem das corretoras</h3>
             <div class="time">HÁ 3 HORAS</div>
           </div>
         </a>
 
         <a href="noticia.html?id=3" class="small-item fade-up" data-category="startups">
-            <img src="imgs/startup.png" alt="Imagem da notícia de startup" class="thumb" style="width: 25%; height: 100px; border-radius: 10px; object-fit: cover;" />
+          <img src="imgs/startup.png" alt="Imagem da notícia de startup" class="thumb" style="width: 25%; height: 100px; border-radius: 10px; object-fit: cover;" />
           <div class="meta">
             <div class="kicker">STARTUPS</div>
             <h3>Ele vendeu sua empresa por US$ 54 milhões e agora aposta em IA como futuro</h3>
@@ -76,6 +75,10 @@
           </div>
         </a>
       </div>
+
+      <!-- Aqui aparecem as notícias novas cadastradas -->
+      <h2 style="margin-top:40px;">Últimas notícias adicionadas</h2>
+      <div id="lista-noticias"></div>
     </section>
 
     <aside class="right-col fade-up" data-category="all">
@@ -108,11 +111,30 @@
       </div>
     </aside>
   </main>
-
+<button onclick="limparNoticias()" >Apagar todas as notícias</button>
   <footer class="footer">
     <p>© 2025 ONRISE — Todos os direitos reservados.</p>
   </footer>
 
-  <script src="script.js" defer></script>
+<script src="script.js" defer></script>
+  
+<script>
+const noticias = JSON.parse(localStorage.getItem("noticias")) || [];
+const container = document.getElementById("lista-noticias");
+
+noticias.forEach((noticia, index) => {
+  const card = document.createElement("a");
+  card.href = `detalhe.html?id=${index}`; 
+  card.classList.add("noticia-card");
+  card.innerHTML = `
+    <img src="${noticia.imagem || 'https://via.placeholder.com/400x200'}" alt="Imagem da notícia">
+    <h2>${noticia.titulo}</h2>
+    <p><strong>Categoria:</strong> ${noticia.categoria}</p>
+    <p>${noticia.resumo || noticia.conteudo.substring(0, 100) + '...'}</p>
+  `;
+  container.appendChild(card);
+});
+</script>
+
 </body>
 </html>

@@ -30,13 +30,9 @@ document.querySelectorAll(".editorial-btn").forEach(btn => {
     });
   });
 });
+function limparNoticias() {
+  localStorage.removeItem("noticias");
+  alert("Todas as notícias foram apagadas!");
+  location.reload(); // recarrega a página para atualizar a lista
+}
 
-
-document.getElementById("search").addEventListener("input", e => {
-  const query = e.target.value.toLowerCase();
-  const cards = document.querySelectorAll("[data-category]");
-  cards.forEach(card => {
-    const text = card.innerText.toLowerCase();
-    card.style.display = text.includes(query) ? "" : "none";
-  });
-});

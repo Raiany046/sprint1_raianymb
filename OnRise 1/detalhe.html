@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ONRISE — Notícias</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+<script>
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+const noticias = JSON.parse(localStorage.getItem("noticias")) || [];
+const noticia = noticias[id];
+
+if (noticia) {
+  document.getElementById("titulo").textContent = noticia.titulo;
+  document.getElementById("categoria").textContent = noticia.categoria;
+  document.getElementById("imagem").src = noticia.imagem || "https://via.placeholder.com/400x200";
+  document.getElementById("conteudo").textContent = noticia.conteudo;
+}
+const msg = localStorage.getItem("mensagem");
+console.log(msg);
+
+</script>
+
+  <h1 id="titulo"></h1>
+  <p><strong>Categoria:</strong> <span id="categoria"></span></p>
+  <img id="imagem" alt="Imagem da notícia">
+  <p id="conteudo"></p>
